@@ -1,27 +1,19 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Image
-          source={{ uri: 'https://i.pravatar.cc/300' }}
-          style={styles.avatar}
-        />
-        <Text style={styles.name}>Laura Martínez</Text>
-        <Text style={styles.job}>Diseñadora UX/UI</Text>
+      <Text style={styles.title}>Bienvenido</Text>
+      <Text style={styles.subtitle}>Introduce tus datos para continuar</Text>
 
-        <View style={styles.stats}>
-          <View style={styles.stat}>
-            <Text style={styles.number}>24</Text>
-            <Text>Proyectos</Text>
-          </View>
-          <View style={styles.stat}>
-            <Text style={styles.number}>1280</Text>
-            <Text>Seguidores</Text>
-          </View>
-        </View>
-      </View>
+      <TextInput style={styles.input} placeholder="Correo electrónico" />
+      <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry />
+
+      <Pressable style={styles.button}>
+        <Text style={styles.buttonText}>INICIAR SESIÓN</Text>
+      </Pressable>
+
+      <Text style={styles.register}>¿No tienes cuenta? Regístrate</Text>
     </View>
   );
 }
@@ -30,39 +22,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 24,
-    backgroundColor: '#e2e8f0',
-  },
-  card: {
-    backgroundColor: 'white',
     padding: 28,
-    borderRadius: 22,
-    alignItems: 'center',
+    backgroundColor: 'white',
   },
-  avatar: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-  },
-  name: {
-    marginTop: 18,
-    fontSize: 25,
+  title: {
+    fontSize: 30,
     fontWeight: 'bold',
   },
-  job: {
-    marginTop: 4,
+  subtitle: {
+    marginTop: 8,
+    marginBottom: 28,
     color: '#64748b',
   },
-  stats: {
-    flexDirection: 'row',
-    gap: 36,
-    marginTop: 24,
+  input: {
+    backgroundColor: '#f1f5f9',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 14,
   },
-  stat: {
-    alignItems: 'center',
+  button: {
+    marginTop: 8,
+    backgroundColor: '#2563eb',
+    padding: 16,
+    borderRadius: 12,
   },
-  number: {
-    fontSize: 21,
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
     fontWeight: 'bold',
+  },
+  register: {
+    textAlign: 'center',
+    marginTop: 22,
+    color: '#64748b',
   },
 });
