@@ -1,13 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>¡Bienvenido!</Text>
-        <Text style={styles.subtitle}>Diseño de interfaces con React Native</Text>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>COMENZAR</Text>
+        <Image
+          source={{ uri: 'https://i.pravatar.cc/300' }}
+          style={styles.avatar}
+        />
+        <Text style={styles.name}>Laura Martínez</Text>
+        <Text style={styles.job}>Diseñadora UX/UI</Text>
+
+        <View style={styles.stats}>
+          <View style={styles.stat}>
+            <Text style={styles.number}>24</Text>
+            <Text>Proyectos</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.number}>1280</Text>
+            <Text>Seguidores</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -19,33 +31,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: '#eef2f7',
+    backgroundColor: '#e2e8f0',
   },
   card: {
     backgroundColor: 'white',
     padding: 28,
-    borderRadius: 20,
+    borderRadius: 22,
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 30,
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+  },
+  name: {
+    marginTop: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
-  subtitle: {
-    marginTop: 10,
-    fontSize: 16,
+  job: {
+    marginTop: 4,
     color: '#64748b',
-    textAlign: 'center',
   },
-  button: {
+  stats: {
+    flexDirection: 'row',
+    gap: 36,
     marginTop: 24,
-    backgroundColor: '#2563eb',
-    padding: 15,
-    borderRadius: 12,
   },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
+  stat: {
+    alignItems: 'center',
+  },
+  number: {
+    fontSize: 21,
     fontWeight: 'bold',
   },
 });
