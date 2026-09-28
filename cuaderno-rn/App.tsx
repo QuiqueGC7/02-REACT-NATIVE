@@ -3,38 +3,54 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.hello}>Buenos días 👋</Text>
-      <Text style={styles.user}>Laura</Text>
+      <Text style={styles.greeting}>Buenos días,</Text>
+      <Text style={styles.user}>Laura 👋</Text>
 
-      <View style={styles.balanceCard}>
-        <Text style={styles.balanceLabel}>Saldo disponible</Text>
-        <Text style={styles.balance}>4.280,32 €</Text>
-        <Text style={styles.account}>ES00 •••• •••• 7821</Text>
+      <View style={styles.goalCard}>
+        <Text style={styles.goalLabel}>OBJETIVO DIARIO</Text>
+        <Text style={styles.steps}>7.540</Text>
+        <Text style={styles.stepsLabel}>pasos de 10.000</Text>
+
+        <View style={styles.progressBackground}>
+          <View style={styles.progress} />
+        </View>
+
+        <Text style={styles.percentage}>75% completado</Text>
       </View>
 
-      <Text style={styles.sectionTitle}>Últimos movimientos</Text>
-      <Movement title="Supermercado" date="Hoy" amount="-42,80 €" />
-      <Movement title="Cafetería" date="Ayer" amount="-3,20 €" />
-      <Movement title="Nómina" date="20 septiembre" amount="+2.340 €" />
-      <Movement title="Electricidad" date="18 septiembre" amount="-74,20 €" />
+      <Text style={styles.sectionTitle}>Resumen de hoy</Text>
+
+      <View style={styles.grid}>
+        <StatCard icon="🔥" value="520" label="Calorías" />
+        <StatCard icon="⏱" value="48 min" label="Actividad" />
+        <StatCard icon="❤️" value="72" label="Pulsaciones" />
+        <StatCard icon="📍" value="5,6 km" label="Distancia" />
+      </View>
+
+      <Text style={styles.sectionTitle}>Actividad reciente</Text>
+      <Activity title="Carrera" detail="5,2 km · 28 min" />
+      <Activity title="Bicicleta" detail="12 km · 42 min" />
     </ScrollView>
   );
 }
 
-type MovementProps = {
-  title: string;
-  date: string;
-  amount: string;
-};
-
-function Movement({ title, date, amount }: MovementProps) {
+function StatCard({ icon, value, label }: { icon: string; value: string; label: string }) {
   return (
-    <View style={styles.movement}>
-      <View style={styles.movementInfo}>
-        <Text style={styles.movementTitle}>{title}</Text>
-        <Text style={styles.movementDate}>{date}</Text>
+    <View style={styles.statCard}>
+      <Text style={styles.statIcon}>{icon}</Text>
+      <Text style={styles.statValue}>{value}</Text>
+      <Text style={styles.statLabel}>{label}</Text>
+    </View>
+  );
+}
+
+function Activity({ title, detail }: { title: string; detail: string }) {
+  return (
+    <View style={styles.activity}>
+      <View>
+        <Text style={styles.activityTitle}>{title}</Text>
+        <Text style={styles.activityDetail}>{detail}</Text>
       </View>
-      <Text style={styles.amount}>{amount}</Text>
     </View>
   );
 }
@@ -45,58 +61,90 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8fafc',
     paddingHorizontal: 20,
   },
-  hello: {
+  greeting: {
     marginTop: 60,
     color: '#64748b',
+    fontSize: 17,
   },
   user: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 24,
   },
-  balanceCard: {
+  goalCard: {
     backgroundColor: '#111827',
-    borderRadius: 22,
     padding: 24,
+    borderRadius: 22,
   },
-  balanceLabel: {
+  goalLabel: {
+    color: '#94a3b8',
+    fontWeight: 'bold',
+  },
+  steps: {
+    marginTop: 12,
+    color: 'white',
+    fontSize: 44,
+    fontWeight: 'bold',
+  },
+  stepsLabel: {
     color: '#cbd5e1',
   },
-  balance: {
-    color: 'white',
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginTop: 8,
+  progressBackground: {
+    height: 10,
+    backgroundColor: '#374151',
+    borderRadius: 5,
+    marginTop: 24,
+    overflow: 'hidden',
   },
-  account: {
-    color: '#94a3b8',
-    marginTop: 28,
+  progress: {
+    width: '75%',
+    height: '100%',
+    backgroundColor: '#22c55e',
+  },
+  percentage: {
+    color: '#cbd5e1',
+    marginTop: 9,
   },
   sectionTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
     marginTop: 28,
     marginBottom: 12,
+    fontSize: 22,
+    fontWeight: 'bold',
   },
-  movement: {
+  grid: {
     flexDirection: 'row',
-    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 12,
+  },
+  statCard: {
+    width: '48%',
     backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 14,
+    borderRadius: 16,
+    padding: 18,
+  },
+  statIcon: {
+    fontSize: 28,
+  },
+  statValue: {
+    marginTop: 12,
+    fontSize: 21,
+    fontWeight: 'bold',
+  },
+  statLabel: {
+    marginTop: 4,
+    color: '#64748b',
+  },
+  activity: {
+    backgroundColor: 'white',
+    padding: 16,
+    borderRadius: 15,
     marginBottom: 10,
   },
-  movementInfo: {
-    flex: 1,
-  },
-  movementTitle: {
+  activityTitle: {
     fontWeight: 'bold',
   },
-  movementDate: {
-    marginTop: 3,
-    color: '#94a3b8',
-  },
-  amount: {
-    fontWeight: 'bold',
+  activityDetail: {
+    marginTop: 4,
+    color: '#64748b',
   },
 });
