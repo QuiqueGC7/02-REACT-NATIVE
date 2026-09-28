@@ -1,32 +1,40 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-
-const products = [
-  { id: '1', icon: '⌨️', name: 'Teclado', price: '59 €' },
-  { id: '2', icon: '🖱️', name: 'Ratón', price: '39 €' },
-  { id: '3', icon: '🖥️', name: 'Monitor', price: '199 €' },
-  { id: '4', icon: '🎧', name: 'Auriculares', price: '79 €' },
-  { id: '5', icon: '💻', name: 'Portátil', price: '899 €' },
-  { id: '6', icon: '📱', name: 'Móvil', price: '599 €' },
-];
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Productos</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.hello}>Buenos días 👋</Text>
+      <Text style={styles.user}>Laura</Text>
 
-      <FlatList
-        data={products}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.icon}>{item.icon}</Text>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.price}>{item.price}</Text>
-          </View>
-        )}
-      />
+      <View style={styles.balanceCard}>
+        <Text style={styles.balanceLabel}>Saldo disponible</Text>
+        <Text style={styles.balance}>4.280,32 €</Text>
+        <Text style={styles.account}>ES00 •••• •••• 7821</Text>
+      </View>
+
+      <Text style={styles.sectionTitle}>Últimos movimientos</Text>
+      <Movement title="Supermercado" date="Hoy" amount="-42,80 €" />
+      <Movement title="Cafetería" date="Ayer" amount="-3,20 €" />
+      <Movement title="Nómina" date="20 septiembre" amount="+2.340 €" />
+      <Movement title="Electricidad" date="18 septiembre" amount="-74,20 €" />
+    </ScrollView>
+  );
+}
+
+type MovementProps = {
+  title: string;
+  date: string;
+  amount: string;
+};
+
+function Movement({ title, date, amount }: MovementProps) {
+  return (
+    <View style={styles.movement}>
+      <View style={styles.movementInfo}>
+        <Text style={styles.movementTitle}>{title}</Text>
+        <Text style={styles.movementDate}>{date}</Text>
+      </View>
+      <Text style={styles.amount}>{amount}</Text>
     </View>
   );
 }
@@ -34,36 +42,61 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 60,
     backgroundColor: '#f8fafc',
+    paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 34,
+  hello: {
+    marginTop: 60,
+    color: '#64748b',
+  },
+  user: {
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 24,
   },
-  row: {
-    gap: 12,
+  balanceCard: {
+    backgroundColor: '#111827',
+    borderRadius: 22,
+    padding: 24,
   },
-  card: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 18,
-    borderRadius: 16,
+  balanceLabel: {
+    color: '#cbd5e1',
+  },
+  balance: {
+    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  account: {
+    color: '#94a3b8',
+    marginTop: 28,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 28,
     marginBottom: 12,
   },
-  icon: {
-    fontSize: 38,
+  movement: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 14,
+    marginBottom: 10,
   },
-  name: {
-    marginTop: 15,
-    fontSize: 17,
+  movementInfo: {
+    flex: 1,
+  },
+  movementTitle: {
     fontWeight: 'bold',
   },
-  price: {
-    marginTop: 6,
-    color: '#2563eb',
+  movementDate: {
+    marginTop: 3,
+    color: '#94a3b8',
+  },
+  amount: {
     fontWeight: 'bold',
   },
 });
